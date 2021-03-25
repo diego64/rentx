@@ -7,7 +7,7 @@
 import { Router } from "express";
 import multer from "multer";
 
-import { createCategoryController } from "../modules/cars/useCases/createCategory";
+import createCategoryController from "../modules/cars/useCases/createCategory";
 import { listCategoriesController } from "../modules/cars/useCases/listCategories";
 import { importCategoryController } from "../modules/cars/useCases/importCaterory";
 
@@ -19,7 +19,7 @@ const upload = multer({
 
 categoriesRoutes.post("/", (request, response) => {
     console.log("Reload Rodando");
-    return createCategoryController.handle(request, response);
+    return createCategoryController().handle(request, response);
 });
 
 categoriesRoutes.get("/", (request, response) => {
