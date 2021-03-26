@@ -2,6 +2,7 @@
 // eslint-disable-next-line prettier/prettier
 
 import { Specification } from "../entities/Specification";
+import "reflect-metadata";
 
 interface ICreateSpecificationDTO {
     name: string,
