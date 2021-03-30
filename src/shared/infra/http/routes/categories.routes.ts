@@ -1,15 +1,9 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-/* eslint-disable import-helpers/order-imports */
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-
 import { Router } from "express";
 import multer from "multer";
 
-import { CreateCategoryController } from "../modules/cars/useCases/createCategory/CreateCategoryController";
-import { ImportCategoryController } from "../modules/cars/useCases/importCaterory/ImportCategoryController";
-import { ListCategoriesController } from "../modules/cars/useCases/listCategories/ListCategoriesController";
+import { CreateCategoryController } from "@modules/cars/useCases/createCategory/CreateCategoryController";
+import { ImportCategoryController } from "@modules/cars/useCases/importCaterory/ImportCategoryController";
+import { ListCategoriesController } from "@modules/cars/useCases/listCategories/ListCategoriesController";
 
 const categoriesRoutes = Router();
 

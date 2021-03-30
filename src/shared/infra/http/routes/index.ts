@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-
-// eslint-disable-next-line import-helpers/order-imports
 import { Router } from "express";
 
 import { authenticateRoutes } from "./authenticate.routes";
