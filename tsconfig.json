@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",                     
+    "target": "es6",                     
     "module": "commonjs",
     "outDir": "./dist",                                   
     "baseUrl": "./src",                             
@@ -15,6 +15,7 @@
     "emitDecoratorMetadata": true,               
     "skipLibCheck": true,                           
     "forceConsistentCasingInFileNames": true,        
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
   }
 }
