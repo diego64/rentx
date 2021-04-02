@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 

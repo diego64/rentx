@@ -1,6 +1,11 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
+import { Connection, createConnection, getConnectionOptions } from "typeorm";
 
-import { createConnection } from "typeorm";
+export default async (localhost = "database"): Promise<Connection> => {
+    const defaultOPtions = await getConnectionOptions();
 
-createConnection();
+    return createConnection(
+        Object.assign(defaultOPtions, {
+            localhost,
+        })
+    );
+};
