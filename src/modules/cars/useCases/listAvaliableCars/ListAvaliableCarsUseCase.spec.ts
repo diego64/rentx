@@ -1,15 +1,11 @@
-import crypto from 'crypto';
-import { CarsRepositoryInMemory } from '@modules/cars/repositories/in-memory/CarsRepositoryInMemory';
-import { ListAvailableCarsUseCase } from './ListAvaliableCarsUseCase';
+import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 
-let listAvailableCarsUseCase: ListAvailableCarsUseCase;
+import { ListAvailableCarsUseCase } from "./ListAvaliableCarsUseCase";
+
 let carsRepositoryInMemory: CarsRepositoryInMemory;
+let listAvailableCarsUseCase: ListAvailableCarsUseCase;
 
-const generate = () => {
-  return crypto.randomBytes(10).toString('hex');
-};
-
-describe('List Cars', () => {
+describe("List Available Cars", () => {
   beforeEach(() => {
     carsRepositoryInMemory = new CarsRepositoryInMemory();
     listAvailableCarsUseCase = new ListAvailableCarsUseCase(
@@ -17,15 +13,15 @@ describe('List Cars', () => {
     );
   });
 
-  it('Should be able to list all available cars', async () => {
+  it("should be able to list all available cars", async () => {
     const car = await carsRepositoryInMemory.create({
-      name: generate(),
-      description: generate(),
-      daily_rate: 150,
-      license_plate: generate(),
-      fine_amount: 50,
-      brand: generate(),
-      category_id: generate()
+      name: "Car",
+      description: "Car description",
+      daily_rate: 100.0,
+      license_plate: "DEF-0000",
+      fine_amount: 40,
+      brand: "Car Brand",
+      category_id: "category_id",
     });
 
     const cars = await listAvailableCarsUseCase.execute({});
@@ -33,55 +29,55 @@ describe('List Cars', () => {
     expect(cars).toEqual([car]);
   });
 
-  it('Should be able to list all available cars by name', async () => {
+  it("should be able to list all available cars by name", async () => {
     const car = await carsRepositoryInMemory.create({
-      name: generate(),
-      description: generate(),
-      daily_rate: 150,
-      license_plate: generate(),
-      fine_amount: 50,
-      brand: generate(),
-      category_id: generate()
+      name: "Car Test",
+      description: "Car description",
+      daily_rate: 100.0,
+      license_plate: "DEF-1111",
+      fine_amount: 40,
+      brand: "Car Brand",
+      category_id: "category_id",
     });
 
     const cars = await listAvailableCarsUseCase.execute({
-      name: car.name
+      name: "Car Test",
     });
 
     expect(cars).toEqual([car]);
   });
 
-  it('Should be able to list all available cars by brandy', async () => {
+  it("should be able to list all available cars by brand", async () => {
     const car = await carsRepositoryInMemory.create({
-      name: generate(),
-      description: generate(),
-      daily_rate: 150,
-      license_plate: generate(),
-      fine_amount: 50,
-      brand: generate(),
-      category_id: generate()
+      name: "Car",
+      description: "Car description",
+      daily_rate: 100.0,
+      license_plate: "DEF-2222",
+      fine_amount: 40,
+      brand: "Brand Test",
+      category_id: "category_id",
     });
 
     const cars = await listAvailableCarsUseCase.execute({
-      brand: car.brand
+      brand: "Brand Test",
     });
 
     expect(cars).toEqual([car]);
   });
 
-  it('Should be able to list all available cars by category_id', async () => {
+  it("should be able to list all available cars by category", async () => {
     const car = await carsRepositoryInMemory.create({
-      name: generate(),
-      description: generate(),
-      daily_rate: 150,
-      license_plate: generate(),
-      fine_amount: 50,
-      brand: generate(),
-      category_id: generate()
+      name: "Car",
+      description: "Car description",
+      daily_rate: 100.0,
+      license_plate: "DEF-3333",
+      fine_amount: 40,
+      brand: "Car Brand",
+      category_id: "category_test",
     });
 
     const cars = await listAvailableCarsUseCase.execute({
-      category_id: car.category_id
+      category_id: "category_id_test",
     });
 
     expect(cars).toEqual([car]);

@@ -4,12 +4,12 @@ import { CreateCarController } from "@modules/cars/useCases/createCar/CreateCarC
 
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
-import { ListCategoriesController } from "@modules/cars/useCases/listCategories/ListCategoriesController";
+import { ListAvailableController } from "@modules/cars/useCases/listAvaliableCars/ListAvaliableCarsController";
 
 const carsRoutes = Router();
 
 const createCarController = new CreateCarController();
-const listAvaliableCarsController = new ListCategoriesController();
+const listAvaliableCarsController = new ListAvailableController();
 
 carsRoutes.post(
     "/",
@@ -18,6 +18,6 @@ carsRoutes.post(
     createCarController.handle
 );
 
-carsRoutes.get("/available", listAvaliableCarsController.hadle);
+carsRoutes.get("/available", listAvaliableCarsController.handle);
 
 export { carsRoutes };
