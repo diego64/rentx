@@ -48,13 +48,15 @@ class CarsRepositoryInMemory implements ICarsRepository {
         if (brand) {
           carsAvailable = carsAvailable.filter((car) => car.brand === brand);
         }
+
+        if (name) {
+          carsAvailable = carsAvailable.filter((car) => car.name === name);
+        }
+
         if (category_id) {
           carsAvailable = carsAvailable.filter(
             (car) => car.category_id === category_id
           );
-        }
-        if (name) {
-          carsAvailable = carsAvailable.filter((car) => car.name === name);
         }
         return carsAvailable;
       }
