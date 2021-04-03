@@ -1,7 +1,4 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-
-import { Specification } from "../entities/Specification";
+import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import "reflect-metadata";
 
 interface ICreateSpecificationDTO {
@@ -13,6 +10,7 @@ interface ICreateSpecificationDTO {
 interface ISpecificationsRepository {
     create({ description, name}: ICreateSpecificationDTO): Promise<void>;
     findByName(name: string): Promise<Specification>;
+    findByIds(ids: string[]): Promise<Specification[]>;
 }
 
 export { ISpecificationsRepository, ICreateSpecificationDTO }

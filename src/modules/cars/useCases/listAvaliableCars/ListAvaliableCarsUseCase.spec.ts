@@ -77,7 +77,7 @@ describe("List Available Cars", () => {
     });
 
     const cars = await listAvailableCarsUseCase.execute({
-      category_id: "category_id_test",
+      category_id: "category_test",
     });
 
     expect(cars).toEqual([car]);
