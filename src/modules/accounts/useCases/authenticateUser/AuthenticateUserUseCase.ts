@@ -36,6 +36,7 @@ class AuthenticateUserUseCase {
     //Comparação de senha informada pelo usuário com a senha cadastrada no BD
     const passwordMatch = await compare(password, user.password);
 
+    //Verificacao da senha
     if(!passwordMatch) {
         throw new AppError("Email or password incorrect!")
       }
