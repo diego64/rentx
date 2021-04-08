@@ -2,10 +2,11 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
+import auth from "@config/auth";
+
 import { AppError } from "@shared/erros/AppError";
 import { IUsersRsepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
-import auth from "@config/auth";
 import { IDateProvider } from "@shared/container/provaiders/DateProvaider/IDateProvider";
 
 interface IRequest {
