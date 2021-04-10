@@ -17,12 +17,13 @@ class EtherealMailProvider implements IMailProvider {
                   secure: account.smtp.secure,
                   auth: {
                     user: account.user,
-                    pass: account.pass
+                    pass: account.pass,
                    },
                 });
 
                 this.client = transporter;
-         }).catch(err => console.error(err));
+         })
+         .catch(err => console.error(err));
     }
 
     async sendMail(to: string, subject: string, body: string): Promise<void> {
