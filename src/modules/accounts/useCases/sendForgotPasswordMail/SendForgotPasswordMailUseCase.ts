@@ -1,11 +1,12 @@
+import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
+import { IUsersRsepository } from "@modules/accounts/repositories/IUsersRepository";
+import { resolve } from "path"
 import { inject, injectable } from "tsyringe";
 import { v4 as uuidV4 } from "uuid";
 
-import { IUsersRsepository } from "@modules/accounts/repositories/IUsersRepository";
-import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
-import { AppError } from "@shared/erros/AppError";
 import { IDateProvider } from "@shared/container/provaiders/DateProvaider/IDateProvider";
 import { IMailProvider } from "@shared/container/provaiders/MailProvider/IMailProvider";
+import { AppError } from "@shared/erros/AppError";
 
 @injectable()
 class SendForgotPasswordMailUseCase {
@@ -13,15 +14,24 @@ class SendForgotPasswordMailUseCase {
         @inject("UsersRepository")
         private usersRepository: IUsersRsepository,
         @inject("UsersTokensRepository")
-        private UsersTokensRepository: IUsersTokensRepository,
+        private usersTokensRepository: IUsersTokensRepository,
         @inject("DayjsDateProvaider")
         private dateProvider: IDateProvider,
         @inject("EtherealMailProvider")
-        private mailprovider: IMailProvider
+        private mailProvider: IMailProvider
     ) {}
 
     async execute(email: string): Promise<void> {
         const user = await this.usersRepository.findByEmail(email);
+
+        const templatePath = resolve(
+            __dirname,
+            "..",
+            "..",
+            "views",
+            "emails",
+            "forgotPassword.hbs"   
+        );
 
         if(!user) {
             throw new AppError("Users does not exists!")
@@ -31,16 +41,24 @@ class SendForgotPasswordMailUseCase {
 
         const expires_date = this.dateProvider.addHours(3);
 
-        await this.UsersTokensRepository.create({
+        await this.usersTokensRepository.create({
+
             refresh_token: token,
             user_id: user.id,
             expires_date,
+
         });
 
-        await this.mailprovider.sendMail(
+        const variables = {
+            name: user.name,
+            link: `${process.env.FORGOT_MAIL_URL}${token}`
+        };
+
+            await this.mailProvider.sendMail(
             email,
             "Recuperação de senha",
-            `O link para o reset é ${token}`
+            variables,
+            templatePath
         );
     }
 }

@@ -3,7 +3,6 @@ import { getRepository, Repository } from "typeorm";
 import { ICreateUserTokenDTO } from "@modules/accounts/dtos/ICreateUserTokenDTO";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 
-
 import { UserTokens } from "../entities/UserTokens";
 
 class UsersTokensRepository implements IUsersTokensRepository {
@@ -39,6 +38,13 @@ class UsersTokensRepository implements IUsersTokensRepository {
     async deletebyId(id: string): Promise<void> {
         await this.repositoy.delete(id);
     }
+
+    async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
+       const userToken = await this.repositoy.findOne({ refresh_token });
+
+       return userToken;
+    }
+
 }
 
 export { UsersTokensRepository }
