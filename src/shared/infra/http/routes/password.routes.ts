@@ -1,6 +1,7 @@
+import { Router } from "express";
+
 import { ResetPasswordController } from "@modules/accounts/useCases/resetPsswordUser/ResetPasswordUserController";
 import { SendForgotPasswordMailController } from "@modules/accounts/useCases/sendForgotPasswordMail/SendForgotPasswordMailController";
-import { Router } from "express";
 
 const passwordRoutes = Router();
 

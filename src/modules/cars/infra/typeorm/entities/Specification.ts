@@ -3,23 +3,23 @@ import { v4 as uuidv4 } from "uuid";
 
 @Entity("specifications")
 class Specification {
-    @PrimaryColumn()
-    id?: string;
+  @PrimaryColumn()
+  id?: string;
 
-    @Column()
-    name: string;
-    
-    @Column()
-    description: string;
+  @Column()
+  name: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+  @Column()
+  description: string;
 
-    constructor() {
-        if(!this.id) {
-            this.id = uuidv4();
-        }
+  @CreateDateColumn()
+  created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuidv4();
     }
+  }
 }
 
-export { Specification }
+export { Specification };

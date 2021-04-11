@@ -6,45 +6,48 @@ import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTok
 import { UserTokens } from "../entities/UserTokens";
 
 class UsersTokensRepository implements IUsersTokensRepository {
-    private repositoy: Repository<UserTokens>
+  private repositoy: Repository<UserTokens>;
 
-    constructor() {
-        this.repositoy = getRepository(UserTokens);
-    }
+  constructor() {
+    this.repositoy = getRepository(UserTokens);
+  }
 
-    async create({ expires_date, refresh_token, user_id }: ICreateUserTokenDTO): Promise<UserTokens> {
-        const userToken = this.repositoy.create({
-            expires_date,
-            refresh_token,
-            user_id,
-        });
+  async create({
+    expires_date,
+    refresh_token,
+    user_id,
+  }: ICreateUserTokenDTO): Promise<UserTokens> {
+    const userToken = this.repositoy.create({
+      expires_date,
+      refresh_token,
+      user_id,
+    });
 
-        await this.repositoy.save(userToken);
+    await this.repositoy.save(userToken);
 
-        return userToken;
-    }
+    return userToken;
+  }
 
-    async findByUserIdAndRefreshToken(
-        user_id: string, 
-        refresh_token: string
-        ): Promise<UserTokens> {
-            const usersTokens = await this.repositoy.findOne({
-                user_id,
-                refresh_token
-            });
-            return usersTokens;
-    }
+  async findByUserIdAndRefreshToken(
+    user_id: string,
+    refresh_token: string
+  ): Promise<UserTokens> {
+    const usersTokens = await this.repositoy.findOne({
+      user_id,
+      refresh_token,
+    });
+    return usersTokens;
+  }
 
-    async deletebyId(id: string): Promise<void> {
-        await this.repositoy.delete(id);
-    }
+  async deletebyId(id: string): Promise<void> {
+    await this.repositoy.delete(id);
+  }
 
-    async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
-       const userToken = await this.repositoy.findOne({ refresh_token });
+  async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
+    const userToken = await this.repositoy.findOne({ refresh_token });
 
-       return userToken;
-    }
-
+    return userToken;
+  }
 }
 
-export { UsersTokensRepository }
+export { UsersTokensRepository };

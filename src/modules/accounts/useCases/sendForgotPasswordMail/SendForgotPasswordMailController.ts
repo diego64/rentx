@@ -4,17 +4,17 @@ import { container } from "tsyringe";
 import { SendForgotPasswordMailUseCase } from "./SendForgotPasswordMailUseCase";
 
 class SendForgotPasswordMailController {
-    async handle(request: Request, response: Response): Promise<Response> {
-        const { email } = request.body;
-        
-        const sendForgotPasswordMailUseCase = container.resolve(
-            SendForgotPasswordMailUseCase
-        );
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { email } = request.body;
 
-        await sendForgotPasswordMailUseCase.execute(email)
+    const sendForgotPasswordMailUseCase = container.resolve(
+      SendForgotPasswordMailUseCase
+    );
 
-        return response.send();
-    }
+    await sendForgotPasswordMailUseCase.execute(email);
+
+    return response.send();
+  }
 }
 
 export { SendForgotPasswordMailController };

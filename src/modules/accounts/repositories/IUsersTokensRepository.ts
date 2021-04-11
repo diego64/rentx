@@ -1,18 +1,22 @@
 import { ICreateUserTokenDTO } from "@modules/accounts/dtos/ICreateUserTokenDTO";
+
 import { UserTokens } from "../infra/typeorm/entities/UserTokens";
 
 interface IUsersTokensRepository {
-    create({
-        expires_date,
-        refresh_token,
-        user_id
-    }: ICreateUserTokenDTO): Promise<UserTokens>;
+  create({
+    expires_date,
+    refresh_token,
+    user_id,
+  }: ICreateUserTokenDTO): Promise<UserTokens>;
 
-    findByUserIdAndRefreshToken(user_id: string, refresh_token: string): Promise<UserTokens>;
+  findByUserIdAndRefreshToken(
+    user_id: string,
+    refresh_token: string
+  ): Promise<UserTokens>;
 
-    deletebyId(id: string): Promise<void>;
+  deletebyId(id: string): Promise<void>;
 
-    findByRefreshToken(refresh_token: string): Promise<UserTokens>;
+  findByRefreshToken(refresh_token: string): Promise<UserTokens>;
 }
 
-export { IUsersTokensRepository }
+export { IUsersTokensRepository };

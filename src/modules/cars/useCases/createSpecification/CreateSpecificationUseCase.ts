@@ -1,34 +1,33 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
-
 import { inject, injectable } from "tsyringe";
 
+import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
 import { AppError } from "@shared/erros/AppError";
-import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository"
 
 interface IRequest {
-    name: string;
-    description: string;
+  name: string;
+  description: string;
 }
 
 @injectable()
 class CreateSpecificationUseCase {
-    constructor(
-        @inject("SpecificationsRepository")
-        private specificationsRepository: ISpecificationsRepository
-        ){}
-    async execute({ name, description }: IRequest): Promise<void> {
-        const specificationAlreadyExists = await this.specificationsRepository.findByName(name);
- 
-        if(specificationAlreadyExists) {
-            throw new AppError("Specification already exists!")
-        }
+  constructor(
+    @inject("SpecificationsRepository")
+    private specificationsRepository: ISpecificationsRepository
+  ) {}
+  async execute({ name, description }: IRequest): Promise<void> {
+    const specificationAlreadyExists = await this.specificationsRepository.findByName(
+      name
+    );
 
-        await this.specificationsRepository.create({
-            name,
-            description,
-        });
+    if (specificationAlreadyExists) {
+      throw new AppError("Specification already exists!");
     }
+
+    await this.specificationsRepository.create({
+      name,
+      description,
+    });
+  }
 }
 
-export { CreateSpecificationUseCase }
+export { CreateSpecificationUseCase };

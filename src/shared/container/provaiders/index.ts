@@ -6,11 +6,11 @@ import { EtherealMailProvider } from "./implementations/EtherealMailProvider";
 import { IMailProvider } from "./MailProvider/IMailProvider";
 
 container.registerSingleton<IDateProvider>(
-    "DayjsDateProvaider",
-    DayjsDateProvaider
+  "DayjsDateProvaider",
+  DayjsDateProvaider
 );
 
 container.registerInstance<IMailProvider>(
-    "EtherealMailProvider",
-    new EtherealMailProvider()
+  "EtherealMailProvider",
+  new EtherealMailProvider()
 );

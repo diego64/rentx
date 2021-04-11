@@ -2,14 +2,17 @@ import { Specification } from "@modules/cars/infra/typeorm/entities/Specificatio
 import "reflect-metadata";
 
 interface ICreateSpecificationDTO {
-    name: string,
-    description: string
+  name: string;
+  description: string;
 }
 
 interface ISpecificationsRepository {
-    create({ description, name}: ICreateSpecificationDTO): Promise<Specification>;
-    findByName(name: string): Promise<Specification>;
-    findByIds(ids: string[]): Promise<Specification[]>;
+  create({
+    description,
+    name,
+  }: ICreateSpecificationDTO): Promise<Specification>;
+  findByName(name: string): Promise<Specification>;
+  findByIds(ids: string[]): Promise<Specification[]>;
 }
 
-export { ISpecificationsRepository, ICreateSpecificationDTO }
+export { ISpecificationsRepository, ICreateSpecificationDTO };
